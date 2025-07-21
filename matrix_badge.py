@@ -27,10 +27,9 @@ IMAGE_NAME = "squirrel.jpg"
 
 # ---- Matrix Rain Configuration ----
 MATRIX_CHARSET = "abcdefghijklmnopqrstuvwxyz0123456789"
-MATRIX_BG_COLOR = DARK                       # Background inside badge behind Matrix
-#MATRIX_CHAR_COLOR = display.create_pen(180, 255, 180)  # Greenish Matrix characters
-MATRIX_CHAR_COLOR = display.create_pen(0, 0, 0)  # Greenish Matrix characters
-
+MATRIX_BG_COLOR = DARK
+MATRIX_CHAR_COLOR = display.create_pen(0, 0, 0)        # Trail characters
+MATRIX_HEAD_COLOR = display.create_pen(110, 110, 110)  # Brighter head
 
 # ---- LAYOUT ----
 BORDER_SIZE = 4
@@ -52,8 +51,10 @@ def draw_matrix_overlay():
         x = int(i * WIDTH / COLS)
         y = drops[i] * CHAR_HEIGHT
         if MATRIX_X <= x < MATRIX_X + MATRIX_W and MATRIX_Y <= y < MATRIX_Y + MATRIX_H:
-            display.set_pen(MATRIX_CHAR_COLOR)
             display.set_font("bitmap6")
+            display.set_pen(MATRIX_CHAR_COLOR)
+            display.text(choice(MATRIX_CHARSET), x, y - CHAR_HEIGHT, WIDTH, FONT_SIZE)
+            display.set_pen(MATRIX_HEAD_COLOR)
             display.text(choice(MATRIX_CHARSET), x, y, WIDTH, FONT_SIZE)
         drops[i] += 1
         if drops[i] * CHAR_HEIGHT > HEIGHT or randint(0, 100) > 97:
@@ -68,20 +69,16 @@ def draw_badge(shift=0):
 def draw_overlay_content(shift=0):
     display.set_pen(DARKEST)
     display.rectangle(BORDER_SIZE, BORDER_SIZE, WIDTH - (BORDER_SIZE * 2), COMPANY_HEIGHT)
-
     display.set_pen(LIGHT)
     display.set_font("bitmap6")
     display.text(COMPANY_NAME, BORDER_SIZE + PADDING + shift, BORDER_SIZE + PADDING, WIDTH, 3)
-
     display.set_pen(LIGHTEST)
     display.set_font("bitmap8")
     display.text(NAME, BORDER_SIZE + PADDING + shift, BORDER_SIZE + PADDING + COMPANY_HEIGHT, WIDTH, 5)
-
     display.set_pen(DARKEST)
     display.text("*", BORDER_SIZE + PADDING + 120 + PADDING, 105, 160, 2)
     display.text("*", BORDER_SIZE + PADDING + 120 + PADDING, 140, 160, 2)
     display.text("*", BORDER_SIZE + PADDING + 120 + PADDING, 175, 160, 2)
-
     display.set_pen(LIGHTEST)
     display.text(BLURB1, BORDER_SIZE + PADDING + 135 + PADDING, 105, 160, 2)
     display.text(BLURB2, BORDER_SIZE + PADDING + 135 + PADDING, 140, 160, 2)
@@ -161,7 +158,6 @@ glitch_interval = 15000
 
 while True:
     current_time = time.ticks_ms()
-
     if time.ticks_diff(current_time, last_matrix_time) > matrix_interval:
         draw_badge()
         draw_matrix_overlay()
