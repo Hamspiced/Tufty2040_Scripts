@@ -18,11 +18,11 @@ DARKEST   = display.create_pen(0, 0, 0)       # Black
 
 # ---- TEXT CONTENT ----
 COMPANY_NAME = "MidwestGadgets"
-NAME = "Hamspiced"
-BLURB1 = "Nick Gambino"
-BLURB2 = "Owner/Maker"
-BLURB3 = "@Hamspiced"
-QR_TEXT = "MidwestGadgets.com"
+NAME = "Handle"
+BLURB1 = "Firstname Lastname"
+BLURB2 = "Title"
+BLURB3 = "@social"
+QR_TEXT = "QRWebsite.com"
 IMAGE_NAME = "squirrel.jpg"
 
 # ---- Matrix Rain Configuration ----
