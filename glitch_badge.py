@@ -26,7 +26,7 @@ BLURB1 = "Firstname Lastname"
 BLURB2 = "Title"
 BLURB3 = "Website"
 QR_TEXT = "QRCODE_WEBSITE_ADDRESS"
-IMAGE_NAME = "logo.jpg"
+IMAGE_NAME = "squirrel.jpg"
 
 # Layout constants
 BORDER_SIZE = 4
